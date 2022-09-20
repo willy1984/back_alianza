@@ -2,6 +2,7 @@ package clients.alianza.co.ServicesImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,6 +63,23 @@ public class ClientsImpl implements ClientsServices {
 			ResponseDTO responseDto = new ResponseDTO(HttpStatus.OK, "Client saved successfully");
 			responseDto.setResponse(clientRepo.save(client));
 			logger.info("Client saved successfully");
+			response = new ResponseEntity<>(responseDto, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			logger.info("ERROR ::: " + e.getMessage());
+			ResponseDTO respuestaDto = new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR,
+					"Create error");
+			response = new ResponseEntity<>(respuestaDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+	}
+	
+	public ResponseEntity<Object> findByKey(String shared) {
+		ResponseEntity<Object> response = ResponseEntity.ok(HttpStatus.OK);
+		try {
+			ResponseDTO responseDto = new ResponseDTO(HttpStatus.OK, "Get Client");
+			responseDto.setResponse(clientRepo.getClient(shared));
+			logger.info("Get client");
 			response = new ResponseEntity<>(responseDto, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

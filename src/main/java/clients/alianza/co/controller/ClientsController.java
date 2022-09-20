@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import clients.alianza.co.dto.ClientsDTO;
@@ -31,6 +32,11 @@ public class ClientsController {
 		@PostMapping("/create-client")
 		public ResponseEntity<Object> createClient(@RequestBody Clients client) {
 			return services.createClient(client);
+		}
+		
+		@GetMapping("/get-clinet-shared")
+		public ResponseEntity<Object> getByKey(@RequestParam("shared") String shared) {
+			return services.findByKey(shared);
 		}
 
 
