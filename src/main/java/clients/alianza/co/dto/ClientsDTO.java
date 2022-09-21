@@ -12,6 +12,20 @@ public class ClientsDTO {
 	private Date dataAdded;
 	
 	public ClientsDTO() {}
+	
+	
+
+	public ClientsDTO(Integer idClient, String sharedKey, String bussinesId, String email, Long phone, Date dataAdded) {
+		super();
+		this.idClient = idClient;
+		this.sharedKey = sharedKey;
+		this.bussinesId = bussinesId;
+		this.email = email;
+		this.phone = phone;
+		this.dataAdded = dataAdded;
+	}
+
+
 
 	public Integer getIdClient() {
 		return idClient;

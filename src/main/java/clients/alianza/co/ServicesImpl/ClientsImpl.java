@@ -90,5 +90,23 @@ public class ClientsImpl implements ClientsServices {
 		}
 		return response;
 	}
+	
+	public ResponseEntity<Object> deleteClient(Integer id) {
+		ResponseEntity<Object> response = ResponseEntity.ok(HttpStatus.OK);
+		try {
+			ResponseDTO responseDto = new ResponseDTO(HttpStatus.OK, "Client delete");
+			clientRepo.deleteById(id);
+			responseDto.setResponse("Client delete");
+			logger.info("Client delete");
+			response = new ResponseEntity<>(responseDto, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			logger.info("ERROR ::: " + e.getMessage());
+			ResponseDTO respuestaDto = new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR,
+					"Create error");
+			response = new ResponseEntity<>(respuestaDto, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+	}
 
 }

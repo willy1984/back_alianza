@@ -10,8 +10,10 @@ import clients.alianza.co.entities.Clients;
 
 public interface ClientsRepository extends CrudRepository<Clients, Integer> {
 	
-	@Query(value = "SELECT * FROM  clients " +
-	   	   	   "WHERE shared_key LIKE :shared%", nativeQuery = true)
-	List<Clients> getClient(String shared);
+	@Query("SELECT new " + " clients.alianza.co.dto.ClientsDTO( "
+			+ " cl.idClient, cl.sharedKey, cl.bussinesId, cl.email, cl.phone, cl.dataAdded )"
+			+ " FROM Clients cl"
+			+ " WHERE cl.sharedKey LIKE :shared%")
+	List<ClientsDTO> getClient(String shared);
 
 }
