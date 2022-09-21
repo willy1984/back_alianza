@@ -1,4 +1,4 @@
-package clients.alianza.co.ServicesImpl;
+package clients.alianza.co.servicesImpl;
 
 import java.util.ArrayList;
 import java.util.List;
